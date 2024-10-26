@@ -1,13 +1,21 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { ComponentStore, OnStateInit } from '@ngrx/component-store';
 
-export interface AppStoreState {
-	count: number;
+export type Sex = 'Male' | 'Female';
+
+export interface Form {
+	name?: string;
+	lastName?: string;
+	sex?: { label: string; value: Sex };
+	homeOwner?: boolean;
+	homeAddress?: string;
 }
 
-const initialState: AppStoreState = {
-	count: 0,
-};
+export interface AppStoreState {
+	form?: Form;
+}
+
+const initialState: AppStoreState = {};
 
 @Injectable()
 export class AppStore

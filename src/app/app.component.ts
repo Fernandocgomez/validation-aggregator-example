@@ -1,39 +1,55 @@
 import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { AppStore } from './store/app.store';
 import { provideComponentStore } from '@ngrx/component-store';
-import { MatSelectModule } from '@angular/material/select';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatGridListModule } from '@angular/material/grid-list';
+
+import {
+	FirstNameInputComponent,
+	HomeAddressInputComponent,
+	HomeownerRadioComponent,
+	LastNameInputComponent,
+	SexSelectComponent,
+} from './form-fileds';
+import { CommonModule } from '@angular/common';
 
 @Component({
 	selector: 'app-root',
 	standalone: true,
 	imports: [
-		MatFormFieldModule,
-		MatInputModule,
-		MatSelectModule,
-		MatGridListModule,
+		CommonModule,
+		FirstNameInputComponent,
+		LastNameInputComponent,
+		SexSelectComponent,
+		HomeownerRadioComponent,
+		HomeAddressInputComponent,
 	],
 	providers: [provideComponentStore(AppStore)],
 	template: `
-		<div class="flex flex-col">
-			<mat-form-field
-				class="m-5"
-				appearance="fill"
-			>
-				<mat-label>Input</mat-label>
-				<input matInput />
-			</mat-form-field>
+		<form class="max-w-lg mx-auto p-6 bg-white rounded shadow-md mt-10">
+			<!-- First Name Input Component -->
+			<app-first-name-input></app-first-name-input>
 
-			<mat-form-field class="m-5">
-				<mat-label>Select</mat-label>
-				<mat-select>
-					<mat-option value="one">First option</mat-option>
-					<mat-option value="two">Second option</mat-option>
-				</mat-select>
-			</mat-form-field>
-		</div>
+			<!-- Last Name Input Component -->
+			<app-last-name-input></app-last-name-input>
+
+			<!-- Sex Select Component -->
+			<app-sex-select></app-sex-select>
+
+			<!-- Homeowner Radio Buttons Component -->
+			<app-homeowner-radio></app-homeowner-radio>
+
+			<!-- Home Address Input Component -->
+			<app-home-address-input></app-home-address-input>
+
+			<!-- Submit Button -->
+			<div class="mt-6">
+				<button
+					type="submit"
+					class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+				>
+					Submit
+				</button>
+			</div>
+		</form>
 	`,
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
