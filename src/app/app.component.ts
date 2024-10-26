@@ -26,19 +26,19 @@ import { CommonModule } from '@angular/common';
 	template: `
 		<form class="max-w-lg mx-auto p-6 bg-white rounded shadow-md mt-10">
 			<!-- First Name Input Component -->
-			<app-first-name-input></app-first-name-input>
+			<app-first-name-input [value]="vm().name" />
 
 			<!-- Last Name Input Component -->
-			<app-last-name-input></app-last-name-input>
+			<app-last-name-input [value]="vm().lastName" />
 
 			<!-- Sex Select Component -->
-			<app-sex-select></app-sex-select>
+			<app-sex-select [value]="vm().sex" />
 
 			<!-- Homeowner Radio Buttons Component -->
-			<app-homeowner-radio></app-homeowner-radio>
+			<app-homeowner-radio [value]="vm().homeOwner" />
 
 			<!-- Home Address Input Component -->
-			<app-home-address-input></app-home-address-input>
+			<app-home-address-input [value]="vm().homeAddress" />
 
 			<!-- Submit Button -->
 			<div class="mt-6">
@@ -55,4 +55,6 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
 	private readonly store = inject(AppStore);
+
+	vm = this.store.vm;
 }

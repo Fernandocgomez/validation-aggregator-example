@@ -15,8 +15,8 @@ import { CommonModule } from '@angular/common';
 			<input
 				type="text"
 				id="name"
-				[value]="name"
-				(input)="onNameChange($event)"
+				[value]="value"
+				(input)="onValueChange($event)"
 				class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
 			/>
 			<div *ngIf="errors?.length">
@@ -31,12 +31,12 @@ import { CommonModule } from '@angular/common';
 	`,
 })
 export class FirstNameInputComponent {
-	@Input() name!: string;
-	@Input() errors!: string[];
-	@Output() nameChange = new EventEmitter<string>();
+	@Input() value?: string; // Updated to allow undefined
+	@Input() errors?: string[]; // Updated to allow undefined
+	@Output() valueChange = new EventEmitter<string>();
 
-	onNameChange(event: any) {
-		this.nameChange.emit(event.target.value);
+	onValueChange(event: any) {
+		this.valueChange.emit(event.target.value);
 	}
 }
 
@@ -54,8 +54,8 @@ export class FirstNameInputComponent {
 			<input
 				type="text"
 				id="lastName"
-				[value]="lastName"
-				(input)="onLastNameChange($event)"
+				[value]="value"
+				(input)="onValueChange($event)"
 				class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
 			/>
 			<div *ngIf="errors?.length">
@@ -70,12 +70,12 @@ export class FirstNameInputComponent {
 	`,
 })
 export class LastNameInputComponent {
-	@Input() lastName!: string;
-	@Input() errors!: string[];
-	@Output() lastNameChange = new EventEmitter<string>();
+	@Input() value?: string; // Updated to allow undefined
+	@Input() errors?: string[]; // Updated to allow undefined
+	@Output() valueChange = new EventEmitter<string>();
 
-	onLastNameChange(event: any) {
-		this.lastNameChange.emit(event.target.value);
+	onValueChange(event: any) {
+		this.valueChange.emit(event.target.value);
 	}
 }
 
@@ -92,14 +92,13 @@ export class LastNameInputComponent {
 			>
 			<select
 				id="sex"
-				[value]="sex"
-				(change)="onSexChange($event)"
+				[value]="value"
+				(change)="onValueChange($event)"
 				class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
 			>
 				<option value="">Select</option>
-				<option value="male">Male</option>
-				<option value="female">Female</option>
-				<option value="other">Other</option>
+				<option value="Male">Male</option>
+				<option value="Female">Female</option>
 			</select>
 			<div *ngIf="errors?.length">
 				<p
@@ -113,12 +112,12 @@ export class LastNameInputComponent {
 	`,
 })
 export class SexSelectComponent {
-	@Input() sex!: string;
-	@Input() errors!: string[];
-	@Output() sexChange = new EventEmitter<string>();
+	@Input() value?: string; // Updated to allow undefined
+	@Input() errors?: string[]; // Updated to allow undefined
+	@Output() valueChange = new EventEmitter<string>();
 
-	onSexChange(event: any) {
-		this.sexChange.emit(event.target.value);
+	onValueChange(event: any) {
+		this.valueChange.emit(event.target.value);
 	}
 }
 
@@ -135,8 +134,8 @@ export class SexSelectComponent {
 				<label class="inline-flex items-center">
 					<input
 						type="radio"
-						[checked]="homeOwner === true"
-						(change)="onHomeOwnerChange(true)"
+						[checked]="value === true"
+						(change)="onValueChange(true)"
 						class="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
 					/>
 					<span class="ml-2">Yes</span>
@@ -144,8 +143,8 @@ export class SexSelectComponent {
 				<label class="inline-flex items-center">
 					<input
 						type="radio"
-						[checked]="homeOwner === false"
-						(change)="onHomeOwnerChange(false)"
+						[checked]="value === false"
+						(change)="onValueChange(false)"
 						class="form-radio h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
 					/>
 					<span class="ml-2">No</span>
@@ -163,12 +162,12 @@ export class SexSelectComponent {
 	`,
 })
 export class HomeownerRadioComponent {
-	@Input() homeOwner!: boolean | null;
-	@Input() errors!: string[];
-	@Output() homeOwnerChange = new EventEmitter<boolean>();
+	@Input() value?: boolean | null; // Updated to allow undefined
+	@Input() errors?: string[]; // Updated to allow undefined
+	@Output() valueChange = new EventEmitter<boolean>();
 
-	onHomeOwnerChange(value: boolean) {
-		this.homeOwnerChange.emit(value);
+	onValueChange(value: boolean) {
+		this.valueChange.emit(value);
 	}
 }
 
@@ -186,8 +185,8 @@ export class HomeownerRadioComponent {
 			<input
 				type="text"
 				id="homeAddress"
-				[value]="homeAddress"
-				(input)="onHomeAddressChange($event)"
+				[value]="value"
+				(input)="onValueChange($event)"
 				class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
 			/>
 			<div *ngIf="errors?.length">
@@ -202,11 +201,11 @@ export class HomeownerRadioComponent {
 	`,
 })
 export class HomeAddressInputComponent {
-	@Input() homeAddress!: string;
-	@Input() errors!: string[];
-	@Output() homeAddressChange = new EventEmitter<string>();
+	@Input() value?: string; // Updated to allow undefined
+	@Input() errors?: string[]; // Updated to allow undefined
+	@Output() valueChange = new EventEmitter<string>();
 
-	onHomeAddressChange(event: any) {
-		this.homeAddressChange.emit(event.target.value);
+	onValueChange(event: any) {
+		this.valueChange.emit(event.target.value);
 	}
 }
