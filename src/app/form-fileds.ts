@@ -15,8 +15,8 @@ import { CommonModule } from '@angular/common';
 			<input
 				type="text"
 				id="name"
-				[value]="value"
-				(input)="onValueChange($event)"
+				[value]="value ?? ''"
+				(blur)="onValueChange($event)"
 				class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
 			/>
 			<div *ngIf="errors?.length">
@@ -54,8 +54,8 @@ export class FirstNameInputComponent {
 			<input
 				type="text"
 				id="lastName"
-				[value]="value"
-				(input)="onValueChange($event)"
+				[value]="value ?? ''"
+				(blur)="onValueChange($event)"
 				class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
 			/>
 			<div *ngIf="errors?.length">
@@ -92,7 +92,7 @@ export class LastNameInputComponent {
 			>
 			<select
 				id="sex"
-				[value]="value"
+				[value]="value ?? ''"
 				(change)="onValueChange($event)"
 				class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
 			>
@@ -185,8 +185,8 @@ export class HomeownerRadioComponent {
 			<input
 				type="text"
 				id="homeAddress"
-				[value]="value"
-				(input)="onValueChange($event)"
+				[value]="value ?? ''"
+				(blur)="onValueChange($event)"
 				class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
 			/>
 			<div *ngIf="errors?.length">
