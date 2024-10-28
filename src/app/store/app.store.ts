@@ -1,6 +1,5 @@
 import { computed, Injectable, OnDestroy } from '@angular/core';
 import { ComponentStore, OnStateInit } from '@ngrx/component-store';
-import { Observable, tap } from 'rxjs';
 import { saveToDraftSuite, statelessSuite } from '../validations/suite';
 
 export type Sex = 'Male' | 'Female';
@@ -16,6 +15,7 @@ export interface Form {
 export interface AppStoreState {
 	form?: Form;
 	formErrors?: { [key in keyof Form]?: string[] };
+	formWarnings?: { [key in keyof Form]?: string[] };
 }
 
 const initialState: AppStoreState = {};
@@ -66,7 +66,9 @@ export class AppStore
 
 			const suiteResults = statelessSuite(newForm, fieldName);
 			const errors = suiteResults.getErrors();
+			const warnings = suiteResults.getWarnings();
 			const filedErrors = errors[fieldName] ?? [];
+			const filedWarnings = warnings[fieldName] ?? [];
 
 			return {
 				...s,
@@ -77,13 +79,16 @@ export class AppStore
 					...s.formErrors,
 					[fieldName]: filedErrors,
 				},
+				formWarnings: {
+					...s.formWarnings,
+					[fieldName]: filedWarnings,
+				},
 			};
 		});
 	}
 
 	submitForm() {
 		const form = this.state().form ?? {};
-
 		const suiteResults = statelessSuite(form);
 
 		if (suiteResults.hasErrors()) {
@@ -98,6 +103,7 @@ export class AppStore
 				};
 			});
 		} else {
+			// Success
 			console.log(this.state());
 		}
 	}
@@ -136,18 +142,13 @@ export class AppStore
 		});
 	}
 
-	private runIndividualValidations(fieldName: keyof Form) {
-		const form = this.state().form ?? {};
-		const suiteResults = statelessSuite(form, fieldName);
-		const errors = suiteResults.getErrors();
-		const filedErrors = errors[fieldName] ?? [];
-
+	removeWarning(fieldName: keyof Form) {
 		this.patchState((s) => {
 			return {
 				...s,
-				formErrors: {
-					...s.formErrors,
-					[fieldName]: filedErrors,
+				formWarnings: {
+					...s.formWarnings,
+					[fieldName]: [],
 				},
 			};
 		});
